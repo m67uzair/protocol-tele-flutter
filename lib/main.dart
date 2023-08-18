@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:protocol_tele_flutter/src/core/config/routes.dart';
 import 'package:protocol_tele_flutter/src/features/onboarding/on_boarding_binding.dart';
+import 'package:protocol_tele_flutter/src/features/signup/signup_binding.dart';
+import 'package:protocol_tele_flutter/src/features/signup/signup_controller.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,8 +24,8 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           smartManagement: SmartManagement.full,
-          initialRoute: AppRoutes.getOnBoarding1Route(),
-          initialBinding: OnBoardingBinding(),
+          initialRoute: AppRoutes.getSignupOptionsRoute(),
+          initialBinding: SignupBinding(),
           getPages: AppRoutes.getPages(),
           onGenerateRoute: (settings) => AppRoutes.generateRoute(settings),
         );

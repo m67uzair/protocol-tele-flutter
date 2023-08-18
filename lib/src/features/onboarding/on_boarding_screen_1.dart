@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:protocol_tele_flutter/src/%20components/custom_button.dart';
+import 'package:protocol_tele_flutter/src/%20components/custom_progress_indicator.dart';
+import 'package:protocol_tele_flutter/src/%20components/custom_signup_widgets.dart';
+import 'package:protocol_tele_flutter/src/core/config/routes.dart';
 import 'package:protocol_tele_flutter/src/core/constants/app_color_constants.dart';
 import 'package:protocol_tele_flutter/src/core/constants/dimension_constants.dart';
 import 'package:protocol_tele_flutter/src/core/constants/string_constants.dart';
 import 'package:protocol_tele_flutter/src/core/constants/style_constants.dart';
+import 'package:protocol_tele_flutter/src/features/onboarding/on_boarding_controller.dart';
 
 class OnBoardingScreen1 extends StatefulWidget {
   const OnBoardingScreen1({Key? key}) : super(key: key);
@@ -12,6 +18,16 @@ class OnBoardingScreen1 extends StatefulWidget {
 }
 
 class _OnBoardingScreen1State extends State<OnBoardingScreen1> {
+  OnBoardingController onBoardingController = Get.find();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      onBoardingController.increaseIndicator();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,112 +35,64 @@ class _OnBoardingScreen1State extends State<OnBoardingScreen1> {
       appBar: AppBar(
         title: Text(
           strProtocol,
-          style: subtitleStyle,
+          style: subtitleStyle.copyWith(color: AppColors.white),
           textAlign: TextAlign.center,
         ),
         centerTitle: true,
         backgroundColor: Colors.black,
       ),
-      body: Center(
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: margin_12),
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(
-              height: height_65,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: height_65,
+                ),
+                Text(
+                  'Use your\nvoice any\nway you\nwant.',
+                  style: titleStyle.copyWith(color: AppColors.white),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: height_65,
+                ),
+                Text(
+                  'Free unlimited calling & texting',
+                  style: mediumHeading.copyWith(color: AppColors.white),
+                ),
+              ],
             ),
-            Text(
-              'Use your\nvoice any\nway you\nwant.',
-              style: titleStyle,
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(
-              height: height_65,
-            ),
-            Text(
-              'Free unlimited calling & texting',
-              style: mediumHeading,
-            ),
-            SizedBox(
-              height: height_120,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: margin_8),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomProgtressIndicator(value: 0.50),
-                  CustomProgtressIndicator(value: 0),
-                  CustomProgtressIndicator(value: 0),
-                  CustomProgtressIndicator(value: 0),
-                  CustomProgtressIndicator(value: 0),
-                  CustomProgtressIndicator(value: 0),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: height_15,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: margin_8),
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ButtonStyle(
-                    backgroundColor: const MaterialStatePropertyAll(AppColors.lightBlue),
-                    shape: MaterialStatePropertyAll(
-                      RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius_50)),
-                    ),
-                    padding: MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: margin_15)),
-                    elevation: const MaterialStatePropertyAll(0),
-                  ),
-                  child: Text(
-                    'Sign Up',
-                    style: TextStyle(color: Colors.black, fontSize: font_17, fontWeight: FontWeight.w500),
+            Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: margin_8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Obx(
+                        () {
+                          return CustomProgtressIndicator(value: onBoardingController.indicatorValue.value);
+                        },
+                      ),
+                      const CustomProgtressIndicator(value: 0),
+                      const CustomProgtressIndicator(value: 0),
+                      const CustomProgtressIndicator(value: 0),
+                      const CustomProgtressIndicator(value: 0),
+                      const CustomProgtressIndicator(value: 0),
+                      const CustomProgtressIndicator(value: 0),
+                    ],
                   ),
                 ),
-              ),
-            ),
-            SizedBox(
-              height: height_15,
-            ),
-            RichText(
-              text: TextSpan(
-                text: "Already have an account? ",
-                style: TextStyle(color: Colors.grey, fontSize: font_16),
-                children: [
-                  TextSpan(
-                    text: 'Log in',
-                    style: TextStyle(color: Colors.white, fontSize: font_16, fontWeight: FontWeight.w500),
-                  ),
-                ],
-              ),
+                const CustomSignUpWidgets(),
+              ],
             )
           ],
         ),
-      ),
-    );
-  }
-}
-
-class CustomProgtressIndicator extends StatelessWidget {
-  const CustomProgtressIndicator({
-    super.key,
-    required this.value,
-  });
-
-  final double value;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: width_45,
-      child: LinearProgressIndicator(
-        value: value,
-        color: AppColors.white,
-        minHeight: height_4,
-        backgroundColor: const Color(0xFF4B4B4B),
       ),
     );
   }

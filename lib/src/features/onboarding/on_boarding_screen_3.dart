@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:protocol_tele_flutter/src/%20components/custom_progress_indicator.dart';
-import 'package:protocol_tele_flutter/src/core/config/routes.dart';
 import 'package:protocol_tele_flutter/src/core/constants/app_color_constants.dart';
 import 'package:protocol_tele_flutter/src/core/constants/dimension_constants.dart';
 import 'package:protocol_tele_flutter/src/core/constants/font_weight_constants.dart';
@@ -9,14 +8,14 @@ import 'package:protocol_tele_flutter/src/core/constants/string_constants.dart';
 import 'package:protocol_tele_flutter/src/core/constants/style_constants.dart';
 import 'package:protocol_tele_flutter/src/features/onboarding/on_boarding_controller.dart';
 
-class OnBoardingScreen2 extends StatefulWidget {
-  const OnBoardingScreen2({Key? key}) : super(key: key);
+class OnBoardingScreen3 extends StatefulWidget {
+  const OnBoardingScreen3({Key? key}) : super(key: key);
 
   @override
-  State<OnBoardingScreen2> createState() => _OnBoardingScreen2State();
+  State<OnBoardingScreen3> createState() => _OnBoardingScreen3State();
 }
 
-class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
+class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
   OnBoardingController onBoardingController = Get.find();
 
   @override
@@ -30,7 +29,7 @@ class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.purple,
+      backgroundColor: AppColors.lightSeaGreen,
       appBar: AppBar(
         title: Text(
           strProtocol,
@@ -38,7 +37,7 @@ class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
           textAlign: TextAlign.center,
         ),
         centerTitle: true,
-        backgroundColor: AppColors.purple,
+        backgroundColor: AppColors.lightSeaGreen,
         elevation: 0,
       ),
       body: Column(
@@ -49,12 +48,20 @@ class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
               // mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset('assets/images/onboard_2.png'),
+                SizedBox(height: height_25),
                 SizedBox(
-                  height: height_25,
+                  height: 150,
+                  width: 220,
+                  child: Image.asset(
+                    'assets/images/onboard_3.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                SizedBox(
+                  height: height_30,
                 ),
                 Text(
-                  'Welcome to paid phone service in an app',
+                  'Pick a paid local phone\nnumber or bring yours.',
                   style: subtitleStyle.copyWith(fontSize: font_30, fontWeight: fontWeight600),
                   textAlign: TextAlign.center,
                 ),
@@ -69,16 +76,12 @@ class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const CustomProgtressIndicator(value: 1),
+                    const CustomProgtressIndicator(value: 1),
                     Obx(
                       () {
-                        print(onBoardingController.indicatorValue.value);
-                        // if (onBoardingController.indicatorValue.value == 1) {
-                        //   Get.toNamed(AppRoutes.onBoarding3);
-                        // }
                         return CustomProgtressIndicator(value: onBoardingController.indicatorValue.value);
                       },
                     ),
-                    const CustomProgtressIndicator(value: 0),
                     const CustomProgtressIndicator(value: 0),
                     const CustomProgtressIndicator(value: 0),
                     const CustomProgtressIndicator(value: 0),
@@ -97,9 +100,13 @@ class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
                     style: ButtonStyle(
                       backgroundColor: const MaterialStatePropertyAll(AppColors.black),
                       shape: MaterialStatePropertyAll(
-                        RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius_50)),
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(radius_50),
+                        ),
                       ),
-                      padding: MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: margin_15)),
+                      padding: MaterialStatePropertyAll(
+                        EdgeInsets.symmetric(vertical: margin_15),
+                      ),
                       elevation: const MaterialStatePropertyAll(0),
                     ),
                     child: Text(
@@ -115,7 +122,7 @@ class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
               RichText(
                 text: TextSpan(
                   text: "Already have an account? ",
-                  style: TextStyle(color: Colors.grey, fontSize: font_16),
+                  style: TextStyle(color: Colors.black54, fontSize: font_16),
                   children: [
                     TextSpan(
                       text: 'Log in',
